@@ -5,7 +5,7 @@ import { CardContainer, Content, HasInfo, ImageBackground, PostInfo, UserInfo, U
 const Card = () => {
   return (
     <CardContainer>
-        <ImageBackground />
+        <ImageBackground src='https://i.pinimg.com/736x/0e/05/5b/0e055bd6fc948f460fe50aa193ac36e6.jpg' />
         <Content>
             <UserInfo>
                 <UserPicture src='https://avatars.githubusercontent.com/u/24796313?v=4'/>
