@@ -1,18 +1,30 @@
-// import { Link } from 'react-router-dom';
-
-// import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
+import { UserInfo } from '../../components/UserInfo';
 
-import { Container } from './styles'
-import { UserInfo } from '../../components/Card/styles';
+import { Column, Container, Title, TitleHighlight } from './styles'
 
 const Feed = () => {
     return (<>
-        <Header />
+        <Header autenticado={true}/>
         <Container>
-            <Card />
-            <UserInfo percentual={50} src={}/>
+            <Column flex={3}>
+                <Title> Feed </Title>
+                <Card />        
+                <Card />    
+                <Card />    
+                <Card />    
+                <Card />    
+            </Column>
+            <Column flex={1}>
+                <TitleHighlight>#RANKING DA SEMANA</TitleHighlight>
+                <UserInfo percentual={50} nome="Matheus Santeago" image='https://avatars.githubusercontent.com/u/24796313?v=4'/>
+                <UserInfo percentual={50} nome="Matheus Santeago" image='https://avatars.githubusercontent.com/u/24796313?v=4'/>
+                <UserInfo percentual={50} nome="Matheus Santeago" image='https://avatars.githubusercontent.com/u/24796313?v=4'/>
+                <UserInfo percentual={50} nome="Matheus Santeago" image='https://avatars.githubusercontent.com/u/24796313?v=4'/>
+                <UserInfo percentual={50} nome="Matheus Santeago" image='https://avatars.githubusercontent.com/u/24796313?v=4'/>
+                <span>VER TODOS</span>
+            </Column>
         </Container>
     </>)
 };
