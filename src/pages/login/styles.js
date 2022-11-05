@@ -67,3 +67,8 @@ export const CriarText = styled.p`
     line-height: 19px;
     color: #E23DD7;
 `
+
+export const ErrorText = styled.p`
+    color: red;
+    font-weight: 700;
+`

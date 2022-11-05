@@ -1,19 +1,43 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+import { api } from '../../services/api';
 
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
 
 import { MdEmail, MdLock } from "react-icons/md";
-
 import { Column, Container, CriarText, EsqueciText, Row, SubtitleLogin, Title, TitleLogin, Wrapper} from './styles'
 
+const schema = yup.object({
+    email: yup.string().email('email não é válido').required('Campo Obrigatório'),
+    password: yup.string().min(3,'No mínimo 3 caracters').required('Campo Obrigatório'),
+  }).required();
+
 const Login = () => {
+    const { register, control, handleSubmit, watch, formState: { errors , isValid} } = useForm({
+        resolver: yupResolver(schema),
+        mode: 'onChange',
+    });;
+
+    const onSubmit = async formData => {
+        try {
+            const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`);
+            if(data.length === 1){
+                navigate('/feed')
+            } else {
+                console.log('Email || Senha inválid')
+            }
+            console.log(data)
+        } catch (error) {
+            alert('ERROR')
+        }
+    };
 
     const navigate = useNavigate();
-    const handleClickSignIn = () => {
-        navigate('/feed');
-    };
 
     return (<>
     <Header />
@@ -30,10 +54,10 @@ const Login = () => {
         <Wrapper>
             <TitleLogin>Faça seu cadastro</TitleLogin>
             <SubtitleLogin> Faça seu login e make the change</SubtitleLogin>
-            <form>
-            <Input placeholder='E-mail' leftIcon={<MdEmail  />}/>
-            <Input placeholder='Senha' type='password' leftIcon={<MdLock />}/>
-            <Button title="Entrar" variant="secondary" onClick={handleClickSignIn} type='button'/>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Input control={control} errorMessage={errors?.email?.message} name="email" placeholder='E-mail' leftIcon={<MdEmail  />}/>
+                <Input control={control} errorMessage={errors?.password?.message} name="password" placeholder='Senha' type='current-password' leftIcon={<MdLock />}/>
+                <Button title="Entrar" variant="secondary" type='submit'/>
             </form>
             <Row>
                 <EsqueciText>Esqueci minha ssenha</EsqueciText>
@@ -44,5 +68,5 @@ const Login = () => {
     </Container>
     </>)
 };
-
+// onClick={handleClickSignIn} 
 export { Login };

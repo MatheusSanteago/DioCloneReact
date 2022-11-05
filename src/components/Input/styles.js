@@ -19,3 +19,7 @@ export const InputText = styled.input`
     height: 38px;
     outline: none;
 ` 
+export const ErrorText = styled.span`
+    color: red;
+    font-size: 20px;
+`
