@@ -11,6 +11,8 @@ import { Input } from '../../components/Input';
 
 import { MdEmail, MdLock } from "react-icons/md";
 import { Column, Container, CriarText, EsqueciText, Row, SubtitleLogin, Title, TitleLogin, Wrapper} from './styles'
+import { IFormData } from './types';
+// import { isFormElement } from 'react-router-dom/dist/dom';
 
 const schema = yup.object({
     email: yup.string().email('email não é válido').required('Campo Obrigatório'),
@@ -18,18 +20,18 @@ const schema = yup.object({
   }).required();
 
 const Login = () => {
-    const { register, control, handleSubmit, watch, formState: { errors , isValid} } = useForm({
+    const {control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange',
     });;
 
-    const onSubmit = async formData => {
+    const onSubmit = async (formData: IFormData) => {
         try {
             const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`);
             if(data.length === 1){
                 navigate('/feed')
             } else {
-                console.log('Email || Senha inválid')
+                console.log('Email || Senha inválida')
             }
             console.log(data)
         } catch (error) {

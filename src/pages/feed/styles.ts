@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IColumn } from './types';
 
 export const Container = styled.main`
     width: 100%;
@@ -30,7 +31,7 @@ export const TitleHighlight = styled.h3`
     margin-bottom: 24px;
     line-height: 25px;
 `
-export const Column = styled.div`
+export const Column = styled.div<IColumn>`
     display: flex;
     flex-direction: column;
    flex:${({flex}) => flex};

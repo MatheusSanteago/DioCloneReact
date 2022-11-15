@@ -4,8 +4,6 @@ import { MdSearch } from "react-icons/md";
 
 import {
     BuscarInputConteiner,
-    ButtonContainer,
-    Column,
     Container,
     IconContainer,
     Input,
@@ -15,9 +13,10 @@ import {
     UserPicture,
     Wrapper
 } from './styles'
+import { IHeader } from './types';
 
 
-const Header = ({autenticado}) => {
+const Header = ({autenticado}: IHeader) => {
   return (
     <Wrapper>
         <Container>
